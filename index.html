@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dominique Riley — Principal Technical Architect specializing in Enterprise AI systems, responsible AI adoption, and executive advisory.">
+  <title>Dominique Riley</title>
+  <style>
+    :root {
+      --bg:           #FAFAF8;
+      --text:         #1C1A18;
+      --text-muted:   #706B64;
+      --accent:       #C4963A;
+      --accent-dark:  #A87B28;
+      --accent-light: #F7EDD8;
+      --border:       #E5DDD0;
+      --card-bg:      #F5F0E8;
+      --max-w:        860px;
+      --serif:        Georgia, 'Times New Roman', serif;
+      --sans:         -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 250, 248, 0.94);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0.875rem 2rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.18s;
+    }
+    nav a:hover { color: var(--accent); }
+
+    /* ── SHARED SECTION ── */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .container + .container {
+      border-top: 1px solid var(--border);
+    }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.625rem, 3vw, 2rem);
+      font-weight: normal;
+      color: var(--text);
+      margin-bottom: 2rem;
+      line-height: 1.3;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 6.5rem 2rem 5rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(2.75rem, 7vw, 4.25rem);
+      font-weight: normal;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .hero-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      letter-spacing: 0.01em;
+    }
+    .hero-tagline {
+      font-size: clamp(1.0625rem, 2.2vw, 1.1875rem);
+      line-height: 1.65;
+      max-width: 560px;
+      border-left: 3px solid var(--accent);
+      padding-left: 1.125rem;
+      font-style: italic;
+      color: #3E3830;
+    }
+    .hero-cta {
+      margin-top: 2.75rem;
+      display: flex;
+      gap: 0.875rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.18s, color 0.18s, border-color 0.18s;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-dark); }
+    .btn-outline { border: 1.5px solid var(--border); color: var(--text); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── ABOUT ── */
+    .about-text {
+      font-size: 1.0625rem;
+      line-height: 1.85;
+      color: #3A3530;
+      max-width: 680px;
+    }
+    .about-text + .about-text { margin-top: 1.25rem; }
+
+    /* ── EXPERIENCE ── */
+    .timeline {
+      position: relative;
+      padding-left: 1.75rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 8px;
+      bottom: 4px;
+      width: 1px;
+      background: var(--border);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.625rem;
+      top: 7px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--accent);
+    }
+    .timeline-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.5rem 0.75rem;
+      margin-bottom: 0.4rem;
+    }
+    .timeline-role {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--text);
+    }
+    .timeline-org {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    .timeline-period {
+      font-size: 0.775rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-left: auto;
+    }
+    .timeline-desc {
+      font-size: 0.9375rem;
+      color: #4A4540;
+      line-height: 1.72;
+    }
+
+    /* ── EDUCATION ── */
+    .edu-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.375rem;
+    }
+    .edu-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .edu-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 7px;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--accent);
+    }
+    .edu-title {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      line-height: 1.4;
+    }
+    .edu-sub {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-top: 0.1rem;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.625rem;
+    }
+    .skill-tag {
+      background: var(--accent-light);
+      color: #3A2E1A;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.35rem 0.875rem;
+      border-radius: 100px;
+      border: 1px solid #DECE9C;
+      letter-spacing: 0.01em;
+      line-height: 1.5;
+    }
+
+    /* ── INTERESTS ── */
+    .interests-text {
+      font-size: 1.0625rem;
+      line-height: 1.85;
+      color: #3A3530;
+      max-width: 640px;
+    }
+
+    /* ── CONTACT ── */
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.125rem;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.9375rem;
+      width: fit-content;
+      transition: color 0.18s;
+    }
+    .contact-link:hover { color: var(--accent); }
+    .contact-link:hover .contact-icon { border-color: var(--accent); }
+    .contact-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: var(--accent-light);
+      border: 1px solid #DECE9C;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.18s;
+    }
+    .contact-icon svg {
+      width: 17px;
+      height: 17px;
+      fill: var(--accent);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      #hero { padding: 4.5rem 1.25rem 3.5rem; }
+      .container { padding: 3.5rem 1.25rem; }
+      nav ul { gap: 1.25rem; padding: 0.75rem 1.25rem; }
+      .timeline-period { margin-left: 0; }
+      h2 { margin-bottom: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav aria-label="Site navigation">
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#interests">Interests</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" aria-label="Introduction">
+  <p class="hero-eyebrow">Principal Technical Architect &amp; Board Member</p>
+  <h1 class="hero-name">Dominique Riley</h1>
+  <p class="hero-subtitle">Enterprise AI Architecture &nbsp;·&nbsp; Salesforce &nbsp;·&nbsp; Retail &amp; CPG</p>
+  <p class="hero-tagline">Translating emerging AI into real-world outcomes — with safety, governance, and trust built in from the start.</p>
+  <div class="hero-cta">
+    <a href="#contact" class="btn btn-primary">Get in touch</a>
+    <a href="#experience" class="btn btn-outline">View experience</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" aria-label="About">
+  <div class="container">
+    <p class="section-label">About</p>
+    <h2>What I do</h2>
+    <p class="about-text">
+      I'm a Technical Architect specializing in enterprise AI systems, model-driven applications, and responsible AI adoption at scale. My work sits at the intersection of emerging technology and real-world outcomes — designing scalable, secure, high-performance architectures that align with enterprise business goals while navigating the nuances of safety, governance, and trust.
+    </p>
+    <p class="about-text">
+      I partner with Fortune 500 executives as a trusted advisor on generative and predictive AI — leading strategy workshops, evaluating LLM behavior in production, and establishing responsible AI guardrails that hold up well beyond the pilot phase.
+    </p>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" aria-label="Experience">
+  <div class="container">
+    <p class="section-label">Experience</p>
+    <h2>Career timeline</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="timeline-role">Principal Technical Architect, Retail</span>
+          <span class="timeline-org">Salesforce</span>
+          <span class="timeline-period">2021 – Present</span>
+        </div>
+        <p class="timeline-desc">
+          Partners with Fortune 500 retail and CPG customers on end-to-end generative and predictive AI architectures. Evaluates LLM behavior in production — failure modes, hallucination risk, prompt sensitivity — and designs human-in-the-loop guardrails. Advises C-suite on AI roadmaps and governance frameworks.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="timeline-role">Sr. Technical Product Manager / Owner</span>
+          <span class="timeline-org">GE Oil &amp; Gas</span>
+          <span class="timeline-period">2019 – 2021</span>
+        </div>
+        <p class="timeline-desc">
+          Led enterprise-wide technology initiatives and designed As-Is/To-Be architectures for ERP and financial systems — Workday, data lakes, DRM, HFM, and Concur. Delivered $109K in cost savings and led cross-functional teams of 13+ engineers.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="timeline-role">Cloud Automation Engineer</span>
+          <span class="timeline-org">GE Oil &amp; Gas</span>
+          <span class="timeline-period">2018 – 2019</span>
+        </div>
+        <p class="timeline-desc">
+          Built high-throughput automation systems using Python and AWS Lambda across a 70,000-employee organization.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="timeline-role">Lead iOS Developer / ServiceNow Developer</span>
+          <span class="timeline-period">2016 – 2018</span>
+        </div>
+        <p class="timeline-desc">
+          Developed native iOS applications in Swift through App Store deployment. Designed stakeholder-facing solutions on the ServiceNow platform.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" aria-label="Education">
+  <div class="container">
+    <p class="section-label">Education</p>
+    <h2>Academic background</h2>
+    <ul class="edu-list">
+      <li class="edu-item">
+        <div class="edu-dot"></div>
+        <div>
+          <div class="edu-title">AI Professional Program</div>
+          <div class="edu-sub">Stanford University &nbsp;·&nbsp; 2025 – Present</div>
+        </div>
+      </li>
+      <li class="edu-item">
+        <div class="edu-dot"></div>
+        <div>
+          <div class="edu-title">Data Science Academy</div>
+          <div class="edu-sub">Entity Academy &nbsp;·&nbsp; 2024</div>
+        </div>
+      </li>
+      <li class="edu-item">
+        <div class="edu-dot"></div>
+        <div>
+          <div class="edu-title">B.S. Chemistry</div>
+          <div class="edu-sub">University of Louisiana at Lafayette &nbsp;·&nbsp; 2013</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" aria-label="Skills">
+  <div class="container">
+    <p class="section-label">Skills</p>
+    <h2>Areas of expertise</h2>
+    <div class="skills-grid">
+      <span class="skill-tag">AI System Design &amp; Evaluation</span>
+      <span class="skill-tag">Responsible AI &amp; Governance</span>
+      <span class="skill-tag">Enterprise AI Architecture</span>
+      <span class="skill-tag">Technical Product Management</span>
+      <span class="skill-tag">Executive Stakeholder Engagement</span>
+      <span class="skill-tag">AI Integration</span>
+      <span class="skill-tag">Data Modeling</span>
+      <span class="skill-tag">SQL Analysis</span>
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">JavaScript</span>
+      <span class="skill-tag">Cloud Security Automation</span>
+    </div>
+  </div>
+</section>
+
+<!-- INTERESTS -->
+<section id="interests" aria-label="Interests">
+  <div class="container">
+    <p class="section-label">Beyond Work</p>
+    <h2>A bit about me</h2>
+    <p class="interests-text">
+      Outside of work, you'll find me deep in a music rabbit hole, streaming a documentary, or obsessing over fashion. I love how all three share a common thread — each is about vision, craft, and communicating something without saying it directly. Music for mood, documentaries for perspective, and fashion as a quiet form of self-expression. They're my reset and my inspiration.
+    </p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" aria-label="Contact">
+  <div class="container">
+    <p class="section-label">Contact</p>
+    <h2>Let's connect</h2>
+    <div class="contact-links">
+
+      <a href="mailto:dtr9323@gmail.com" class="contact-link">
+        <div class="contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </div>
+        dtr9323@gmail.com
+      </a>
+
+      <a href="https://www.linkedin.com/in/dominiquetriley/" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <div class="contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+          </svg>
+        </div>
+        linkedin.com/in/dominiquetriley
+      </a>
+
+      <a href="https://github.com/dominique-riley" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <div class="contact-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+          </svg>
+        </div>
+        github.com/dominique-riley
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Dominique Riley</p>
+</footer>
+
+</body>
+</html>
