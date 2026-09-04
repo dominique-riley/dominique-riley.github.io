@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Dominique Riley — Principal Technical Architect specializing in Enterprise AI systems, responsible AI adoption, and executive advisory.">
   <title>Dominique Riley</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg:           #FAFAF8;
@@ -14,34 +17,73 @@
       --accent-dark:  #A87B28;
       --accent-light: #F7EDD8;
       --border:       #E5DDD0;
-      --card-bg:      #F5F0E8;
       --max-w:        860px;
-      --serif:        Georgia, 'Times New Roman', serif;
-      --sans:         -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --display:      'Fraunces', Georgia, serif;
+      --sans:         'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       font-family: var(--sans);
       background: var(--bg);
       color: var(--text);
       line-height: 1.7;
       font-size: 16px;
+      -webkit-font-smoothing: antialiased;
     }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    .stagger > * {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .stagger.visible > * { opacity: 1; transform: none; }
+    .stagger.visible > *:nth-child(1)  { transition-delay: 0.04s; }
+    .stagger.visible > *:nth-child(2)  { transition-delay: 0.10s; }
+    .stagger.visible > *:nth-child(3)  { transition-delay: 0.16s; }
+    .stagger.visible > *:nth-child(4)  { transition-delay: 0.22s; }
+    .stagger.visible > *:nth-child(5)  { transition-delay: 0.28s; }
+    .stagger.visible > *:nth-child(6)  { transition-delay: 0.34s; }
+    .stagger.visible > *:nth-child(7)  { transition-delay: 0.40s; }
+    .stagger.visible > *:nth-child(8)  { transition-delay: 0.46s; }
+    .stagger.visible > *:nth-child(9)  { transition-delay: 0.52s; }
+    .stagger.visible > *:nth-child(10) { transition-delay: 0.58s; }
+    .stagger.visible > *:nth-child(11) { transition-delay: 0.64s; }
+
+    /* ── HERO ENTRANCE ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .hero-eyebrow  { animation: fadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both; }
+    .hero-name     { animation: fadeUp 0.8s  cubic-bezier(0.16, 1, 0.3, 1) 0.18s both; }
+    .hero-subtitle { animation: fadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both; }
+    .hero-tagline  { animation: fadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.52s both; }
+    .hero-cta      { animation: fadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.66s both; }
 
     /* ── NAV ── */
     nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(250, 250, 248, 0.94);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(250, 250, 248, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.25s;
     }
+    nav.scrolled { box-shadow: 0 1px 16px rgba(0,0,0,0.07); }
     nav ul {
       display: flex;
       list-style: none;
@@ -53,6 +95,7 @@
       align-items: center;
     }
     nav a {
+      position: relative;
       text-decoration: none;
       color: var(--text-muted);
       font-size: 0.8125rem;
@@ -60,70 +103,82 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
       transition: color 0.18s;
+      padding-bottom: 2px;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--accent);
+      transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
     nav a:hover { color: var(--accent); }
+    nav a:hover::after { width: 100%; }
 
-    /* ── SHARED SECTION ── */
+    /* ── SHARED ── */
     .container {
       max-width: var(--max-w);
       margin: 0 auto;
       padding: 5rem 2rem;
     }
-    .container + .container {
-      border-top: 1px solid var(--border);
-    }
+    .container + .container { border-top: 1px solid var(--border); }
     .section-label {
       font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
+      font-weight: 600;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.65rem;
     }
     h2 {
-      font-family: var(--serif);
-      font-size: clamp(1.625rem, 3vw, 2rem);
-      font-weight: normal;
+      font-family: var(--display);
+      font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+      font-weight: 300;
       color: var(--text);
       margin-bottom: 2rem;
-      line-height: 1.3;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
     }
 
     /* ── HERO ── */
     #hero {
       max-width: var(--max-w);
       margin: 0 auto;
-      padding: 6.5rem 2rem 5rem;
+      padding: 7rem 2rem 5.5rem;
     }
     .hero-eyebrow {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
     }
     .hero-name {
-      font-family: var(--serif);
-      font-size: clamp(2.75rem, 7vw, 4.25rem);
-      font-weight: normal;
-      line-height: 1.1;
+      font-family: var(--display);
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 300;
+      line-height: 1.05;
       color: var(--text);
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
     }
     .hero-subtitle {
-      font-size: 1rem;
+      font-size: 0.9375rem;
       color: var(--text-muted);
-      margin-bottom: 2rem;
-      letter-spacing: 0.01em;
+      margin-bottom: 2.25rem;
+      letter-spacing: 0.02em;
     }
     .hero-tagline {
-      font-size: clamp(1.0625rem, 2.2vw, 1.1875rem);
+      font-family: var(--display);
+      font-size: clamp(1.0625rem, 2.2vw, 1.25rem);
+      font-weight: 300;
+      font-style: italic;
       line-height: 1.65;
       max-width: 560px;
-      border-left: 3px solid var(--accent);
-      padding-left: 1.125rem;
-      font-style: italic;
+      border-left: 2px solid var(--accent);
+      padding-left: 1.25rem;
       color: #3E3830;
     }
     .hero-cta {
@@ -134,16 +189,26 @@
     }
     .btn {
       display: inline-block;
-      padding: 0.6rem 1.5rem;
+      padding: 0.625rem 1.5rem;
+      font-family: var(--sans);
       font-size: 0.875rem;
       font-weight: 500;
       text-decoration: none;
       border-radius: 4px;
-      transition: background 0.18s, color 0.18s, border-color 0.18s;
       letter-spacing: 0.01em;
+      transition: background 0.18s, color 0.18s, border-color 0.18s,
+                  transform 0.18s, box-shadow 0.18s;
     }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover { background: var(--accent-dark); }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 1px 6px rgba(196,150,58,0.25);
+    }
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      box-shadow: 0 4px 16px rgba(196,150,58,0.35);
+    }
     .btn-outline { border: 1.5px solid var(--border); color: var(--text); }
     .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
@@ -164,9 +229,7 @@
     .timeline::before {
       content: '';
       position: absolute;
-      left: 3px;
-      top: 8px;
-      bottom: 4px;
+      left: 3px; top: 8px; bottom: 4px;
       width: 1px;
       background: var(--border);
     }
@@ -180,12 +243,13 @@
       position: absolute;
       left: -1.625rem;
       top: 7px;
-      width: 9px;
-      height: 9px;
+      width: 9px; height: 9px;
       border-radius: 50%;
       background: var(--accent);
       box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--accent);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
+    .timeline-item:hover::before { transform: scale(1.35); }
     .timeline-header {
       display: flex;
       flex-wrap: wrap;
@@ -193,27 +257,16 @@
       gap: 0.5rem 0.75rem;
       margin-bottom: 0.4rem;
     }
-    .timeline-role {
-      font-weight: 600;
-      font-size: 0.9375rem;
-      color: var(--text);
-    }
-    .timeline-org {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-    }
+    .timeline-role  { font-weight: 600; font-size: 0.9375rem; color: var(--text); }
+    .timeline-org   { font-size: 0.875rem; color: var(--text-muted); }
     .timeline-period {
-      font-size: 0.775rem;
+      font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       color: var(--accent);
       margin-left: auto;
     }
-    .timeline-desc {
-      font-size: 0.9375rem;
-      color: #4A4540;
-      line-height: 1.72;
-    }
+    .timeline-desc  { font-size: 0.9375rem; color: #4A4540; line-height: 1.75; }
 
     /* ── EDUCATION ── */
     .edu-list {
@@ -222,47 +275,38 @@
       flex-direction: column;
       gap: 1.375rem;
     }
-    .edu-item {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
+    .edu-item { display: flex; gap: 1rem; align-items: flex-start; }
     .edu-dot {
-      width: 8px;
-      height: 8px;
+      width: 8px; height: 8px;
       border-radius: 50%;
       background: var(--accent);
       margin-top: 7px;
       flex-shrink: 0;
       box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--accent);
     }
-    .edu-title {
-      font-weight: 600;
-      font-size: 0.9375rem;
-      line-height: 1.4;
-    }
-    .edu-sub {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      margin-top: 0.1rem;
-    }
+    .edu-title { font-weight: 600; font-size: 0.9375rem; line-height: 1.4; }
+    .edu-sub   { font-size: 0.875rem; color: var(--text-muted); margin-top: 0.1rem; }
 
     /* ── SKILLS ── */
-    .skills-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 0.625rem;
-    }
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 0.5rem 0.625rem; }
     .skill-tag {
       background: var(--accent-light);
       color: #3A2E1A;
       font-size: 0.8rem;
       font-weight: 500;
-      padding: 0.35rem 0.875rem;
+      padding: 0.375rem 0.9rem;
       border-radius: 100px;
       border: 1px solid #DECE9C;
       letter-spacing: 0.01em;
       line-height: 1.5;
+      cursor: default;
+      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.18s, background 0.18s;
+    }
+    .skill-tag:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      background: #EFE0C0;
     }
 
     /* ── INTERESTS ── */
@@ -274,11 +318,7 @@
     }
 
     /* ── CONTACT ── */
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 1.125rem;
-    }
+    .contact-links { display: flex; flex-direction: column; gap: 1.125rem; }
     .contact-link {
       display: flex;
       align-items: center;
@@ -290,10 +330,12 @@
       transition: color 0.18s;
     }
     .contact-link:hover { color: var(--accent); }
-    .contact-link:hover .contact-icon { border-color: var(--accent); }
+    .contact-link:hover .contact-icon {
+      border-color: var(--accent);
+      transform: scale(1.1);
+    }
     .contact-icon {
-      width: 38px;
-      height: 38px;
+      width: 38px; height: 38px;
       border-radius: 8px;
       background: var(--accent-light);
       border: 1px solid #DECE9C;
@@ -301,13 +343,9 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      transition: border-color 0.18s;
+      transition: border-color 0.18s, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .contact-icon svg {
-      width: 17px;
-      height: 17px;
-      fill: var(--accent);
-    }
+    .contact-icon svg { width: 17px; height: 17px; fill: var(--accent); }
 
     /* ── FOOTER ── */
     footer {
@@ -320,7 +358,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
-      #hero { padding: 4.5rem 1.25rem 3.5rem; }
+      #hero { padding: 5rem 1.25rem 4rem; }
       .container { padding: 3.5rem 1.25rem; }
       nav ul { gap: 1.25rem; padding: 0.75rem 1.25rem; }
       .timeline-period { margin-left: 0; }
@@ -330,7 +368,7 @@
 </head>
 <body>
 
-<nav aria-label="Site navigation">
+<nav id="nav" aria-label="Site navigation">
   <ul>
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
@@ -356,12 +394,12 @@
 <!-- ABOUT -->
 <section id="about" aria-label="About">
   <div class="container">
-    <p class="section-label">About</p>
-    <h2>What I do</h2>
-    <p class="about-text">
+    <p class="section-label reveal">About</p>
+    <h2 class="reveal">What I do</h2>
+    <p class="about-text reveal">
       I'm a Technical Architect specializing in enterprise AI systems, model-driven applications, and responsible AI adoption at scale. My work sits at the intersection of emerging technology and real-world outcomes — designing scalable, secure, high-performance architectures that align with enterprise business goals while navigating the nuances of safety, governance, and trust.
     </p>
-    <p class="about-text">
+    <p class="about-text reveal">
       I partner with Fortune 500 executives as a trusted advisor on generative and predictive AI — leading strategy workshops, evaluating LLM behavior in production, and establishing responsible AI guardrails that hold up well beyond the pilot phase.
     </p>
   </div>
@@ -370,9 +408,9 @@
 <!-- EXPERIENCE -->
 <section id="experience" aria-label="Experience">
   <div class="container">
-    <p class="section-label">Experience</p>
-    <h2>Career timeline</h2>
-    <div class="timeline">
+    <p class="section-label reveal">Experience</p>
+    <h2 class="reveal">Career timeline</h2>
+    <div class="timeline stagger">
 
       <div class="timeline-item">
         <div class="timeline-header">
@@ -424,9 +462,9 @@
 <!-- EDUCATION -->
 <section id="education" aria-label="Education">
   <div class="container">
-    <p class="section-label">Education</p>
-    <h2>Academic background</h2>
-    <ul class="edu-list">
+    <p class="section-label reveal">Education</p>
+    <h2 class="reveal">Academic background</h2>
+    <ul class="edu-list stagger">
       <li class="edu-item">
         <div class="edu-dot"></div>
         <div>
@@ -455,9 +493,9 @@
 <!-- SKILLS -->
 <section id="skills" aria-label="Skills">
   <div class="container">
-    <p class="section-label">Skills</p>
-    <h2>Areas of expertise</h2>
-    <div class="skills-grid">
+    <p class="section-label reveal">Skills</p>
+    <h2 class="reveal">Areas of expertise</h2>
+    <div class="skills-grid stagger">
       <span class="skill-tag">AI System Design &amp; Evaluation</span>
       <span class="skill-tag">Responsible AI &amp; Governance</span>
       <span class="skill-tag">Enterprise AI Architecture</span>
@@ -476,9 +514,9 @@
 <!-- INTERESTS -->
 <section id="interests" aria-label="Interests">
   <div class="container">
-    <p class="section-label">Beyond Work</p>
-    <h2>A bit about me</h2>
-    <p class="interests-text">
+    <p class="section-label reveal">Beyond Work</p>
+    <h2 class="reveal">A bit about me</h2>
+    <p class="interests-text reveal">
       Outside of work, you'll find me deep in a music rabbit hole, streaming a documentary, or obsessing over fashion. I love how all three share a common thread — each is about vision, craft, and communicating something without saying it directly. Music for mood, documentaries for perspective, and fashion as a quiet form of self-expression. They're my reset and my inspiration.
     </p>
   </div>
@@ -487,13 +525,13 @@
 <!-- CONTACT -->
 <section id="contact" aria-label="Contact">
   <div class="container">
-    <p class="section-label">Contact</p>
-    <h2>Let's connect</h2>
-    <div class="contact-links">
+    <p class="section-label reveal">Contact</p>
+    <h2 class="reveal">Let's connect</h2>
+    <div class="contact-links stagger">
 
       <a href="mailto:dtr9323@gmail.com" class="contact-link">
         <div class="contact-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
           </svg>
         </div>
@@ -502,7 +540,7 @@
 
       <a href="https://www.linkedin.com/in/dominiquetriley/" target="_blank" rel="noopener noreferrer" class="contact-link">
         <div class="contact-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
           </svg>
         </div>
@@ -511,7 +549,7 @@
 
       <a href="https://github.com/dominique-riley" target="_blank" rel="noopener noreferrer" class="contact-link">
         <div class="contact-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
           </svg>
         </div>
@@ -525,6 +563,24 @@
 <footer>
   <p>&copy; 2026 Dominique Riley</p>
 </footer>
+
+<script>
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    }),
+    { threshold: 0.08, rootMargin: '0px 0px -32px 0px' }
+  );
+  document.querySelectorAll('.reveal, .stagger').forEach(el => observer.observe(el));
+
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+</script>
 
 </body>
 </html>
